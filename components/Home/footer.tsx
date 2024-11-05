@@ -29,7 +29,7 @@ const Footer = ({user, type='desktop'}:FooterProps) => {
             </p>
         </div>
 
-        <div className="footer_image" onClick={() => handleLogOut()}>
+        <div className="footer_image text-red-400" onClick={() => handleLogOut()}>
             <Image src={assets.Logout} alt='Logout'/>
         </div>
     </footer>
