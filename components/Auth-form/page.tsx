@@ -15,6 +15,7 @@ import { Loader2 } from 'lucide-react'
 import { SignIn } from '@/lib/action/user.server'
 import { SignUp } from '@/lib/action/user.server'
 import { useRouter } from 'next/navigation'
+import PlaidLink from '../PlaidLink'
 
 // Define the form schema with zod
 
@@ -40,7 +41,7 @@ const Authform = ({ type }: { type: string }) => {
       .regex(/\d/, { message: "Password must contain at least one number." })
   })
 
-  const [user, setUser] = useState<string | null>(null)
+  const [user, setUser] = useState<null>(null)
   const [isloading, setIsLoading] = useState(false)
 
   // Initialize useForm with schema validation
@@ -79,7 +80,19 @@ const Authform = ({ type }: { type: string }) => {
             if(res) router.push('/')    
         }else if (type === 'sign-up'){
           // this is where the sign up auth takes place 
-             const newUsers = await SignUp(data)
+          const userData = {
+            fname: data.fname!,
+            lname: data.lname!,
+            address1: data.address1!,
+            city: data.city!,
+            state: data.state!,
+            postal: data.postal!,
+            dob: data.dob!,
+            ssn: data.ssn!,
+            email: data.email,
+            password: data.password,
+          }
+             const newUsers = await SignUp(userData)
              setUser(newUsers)
         }
     } catch (error) {
@@ -95,27 +108,27 @@ const Authform = ({ type }: { type: string }) => {
     <div className='auth-form'>
       <header className='auth-header'>
         <Link href='/' className='flex items-center gap-4'>
-          <Image src={asset.Logo} alt='Logo' className='size-[24px] max-xl-14' />
-          <p className='font-bold text-26 text-black-1'>Horizon</p>
+          <Image src={asset.Logo} alt='Logo' className='size-[40px] max-xl-14' />
+          <p className='font-bold text-[36px] text-black-1'>Horizon</p>
         </Link>
 
-        <div className='text-24 lg:text-36 font-semibold text-gray-900'>
+        <div className='text-16 lg:text-36 font-semibold text-gray-800'>
           {user
             ? 'Link Account'
-            : type === 'sign-in' ? 'Sign in' : 'Sign up'
+            : type === 'sign-in' ? 'Sign in' : 'Sign Up'
           }
 
-          <p className='text-16 text-gray-600'>
+          <p className='text-16 text-gray-600 mt-2'>
             {user ? 'Link your account to get started' : 'Please enter your details'}
           </p>
         </div>
       </header>
 
-      {user ? (
+      {/* {user ? ( */}
         <div>
-          {/* {"plaid"} */}
+          <PlaidLink user={user} variant='primary'/>
         </div>
-      ) : (
+      {/* // ) : ( */}
         <>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}
@@ -217,7 +230,7 @@ const Authform = ({ type }: { type: string }) => {
             </p>
           </footer>
         </>
-      )}
+      {/* )} */}
     </div>
   )
 }

@@ -7,7 +7,7 @@ import { sidebarLinks } from '@/constant'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import Footer from '../Home/footer'
-const sidebar = ({ user }: { user:User }) => {
+const Sidebar = ({ user }: { user:User }) => {
   const pathname = usePathname();
   return (
     <div className='w-[16vw] max-xl:w-[5vw] '>
@@ -43,4 +43,4 @@ const sidebar = ({ user }: { user:User }) => {
   )
 }
 
-export default sidebar
+export default Sidebar

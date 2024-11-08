@@ -48,14 +48,14 @@ declare interface CustomInputProps {
 }
 
 declare type SignUpParams = {
-  fname?: string;
-  lname?: string;
-  address1?: string;
-  city?: string;
-  state?: string;
-  postalCode?: string;
-  dateOfBirth?: string;
-  ssn?: string;
+  fname: string;
+  lname: string;
+  address1: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  dateOfBirth: string;
+  ssn: string;
   email: string;
   password: string;
 };
@@ -68,4 +68,24 @@ declare interface signInProps {
 declare interface FooterProps {
   user: User;
   type?: 'mobile' | 'desktop'
+}
+
+declare interface PlaidLinkProps {
+  user: User;
+  variant?: "primary" | "ghost";
+  dwollaCustomerId?: string;
+}
+
+declare interface exchangePublicTokenProps {
+  publicToken: string;
+  user: User;
+}
+
+declare interface createBankAccountProps {
+  accessToken: string;
+  userId: string;
+  accountId: string;
+  bankId: string;
+  fundingSourceUrl: string;
+  shareableId: string;
 }
